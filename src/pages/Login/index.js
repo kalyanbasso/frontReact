@@ -21,9 +21,8 @@ class Login extends Component {
 			});
 		} else {
 			try {
-				//await api.post("/oauth", {username, password});
-				login("fsaff");
-				//login(response.data.token);
+				const response = await api.post("/login", {username, password});
+				login(response.data.token);
 				this.props.history.push("/app");
 			} catch (err){
 				console.log(err);
