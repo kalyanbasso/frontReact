@@ -19,9 +19,9 @@ export const Form = styled.form`
     margin: 10px 0 40px;
   }
   p {
-    color: #ff3333;
+    color: #060b26;
     margin-bottom: 15px;
-    border: 1px solid #ff3333;
+    border: 1px solid #060b26;
     padding: 10px;
     width: 100%;
     text-align: center;
@@ -42,7 +42,7 @@ export const Form = styled.form`
   button {
     color: #fff;
     font-size: 16px;
-    background: #fc6963;
+    background: #060b26;
     height: 56px;
     border: 0;
     border-radius: 5px;
