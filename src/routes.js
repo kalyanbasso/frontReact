@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { isAuthenticated } from "./services/auth";
 import Registrar from "./pages/Registrar";
 import Login from "./pages/Login";
+import Sistema from "./pages/Sistema";
 import Navbar from "./components/navbar/NavBar";
 
 const PrivateRoute = ({ component: Component, ...rest}) => (
@@ -22,12 +23,16 @@ const PrivateRoute = ({ component: Component, ...rest}) => (
 
 const Routes = () => (
 	<BrowserRouter>
-		<Switch>
-			<Route exact path="/" component={Login} />
-			<Route path="/registrar" component={Registrar} />
-			<PrivateRoute path="/app" component={Navbar} />
-			<Route path="*" component={() => <h3>404 não encontrado</h3>} />
-		</Switch>
+	<div style={{ display: 'flex' }}>
+		<Navbar />
+			<Switch>
+				<Route exact path="/" component={Login} />
+				<Route path="/registrar" component={Registrar} />
+				<PrivateRoute path="/app" component={Navbar} />
+				<PrivateRoute path="/sistema" component={Sistema} />
+				<Route path="*" component={() => <h3>404 não encontrado</h3>} />
+			</Switch>
+	</div>
 	</BrowserRouter>
 )
 

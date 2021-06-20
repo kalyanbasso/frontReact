@@ -1,7 +1,14 @@
 .navbar {
-    background-color: #060b26;
+    background-color: rgb(0, 247, 255);
     height: 80px;
-    display: flex;
+    width: 100%;
+    justify-content: start;
+    align-items: center;
+    
+  }
+
+  .aloalo {
+    background-color: rgb(0, 247, 255);
     justify-content: start;
     align-items: center;
   }
