@@ -4,15 +4,25 @@ import StickyHeadTable from '../../components/table';
 import Navbar from "../../components/navbar/NavBar";
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
+import Button from '@material-ui/core/Button';
   
 const useStyles = makeStyles((theme) => ({
 	title: {
-	  marginTop: theme.spacing(8),
-	  display: 'flex',
-	  flexDirection: 'column',
 	  alignItems: 'center',
+    fontSize: '2em'
 	},
+  bar: {
+    marginTop: theme.spacing(8),
+	  marginBottom: theme.spacing(4),
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  }
 }));
+
+function novoProjeto() {
+    console.log("object");
+}
 
 export default function Sistema() {
 	const [sistemas, setSistemas] = useState([])
@@ -37,9 +47,19 @@ export default function Sistema() {
 		<>
 			<Navbar />
 			<Container>
-				<Typography className={classes.title}>
-					Sistemas
-				</Typography>
+        <div className={classes.bar}>
+          <Typography className={classes.title}>
+            Sistemas
+          </Typography>
+          <Button
+            onClick={novoProjeto}
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Novo
+          </Button>
+        </div>
 				<StickyHeadTable tableData = {data}/>
 			</Container>
 		</>
