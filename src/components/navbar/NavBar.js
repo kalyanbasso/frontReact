@@ -30,7 +30,7 @@ export default function MiniDrawer() {
         >
           <List>
           {SidebarData.map((item, index) => (
-            <Link to={item.path} className={classes.link}>
+            <Link key={index} to={item.path} className={classes.link}>
             <ListItem button>
               <ListItemIcon>
                 {item.icon}

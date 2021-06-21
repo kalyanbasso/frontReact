@@ -24,14 +24,13 @@ const PrivateRoute = ({ component: Component, ...rest}) => (
 const Routes = () => (
 	<BrowserRouter>
 	<div style={{ display: 'flex' }}>
-		<Navbar />
-			<Switch>
-				<Route exact path="/" component={Login} />
-				<Route path="/registrar" component={Registrar} />
-				<PrivateRoute path="/app" component={Navbar} />
-				<PrivateRoute path="/sistema" component={Sistema} />
-				<Route path="*" component={() => <h3>404 não encontrado</h3>} />
-			</Switch>
+		<Switch>
+			<Route exact path="/" component={Login} />
+			<Route path="/registrar" component={Registrar} />
+			<PrivateRoute path="/app" component={Navbar} />
+			<PrivateRoute path="/sistema" component={Sistema} />
+			<Route path="*" component={() => <h3>404 não encontrado</h3>} />
+		</Switch>
 	</div>
 	</BrowserRouter>
 )

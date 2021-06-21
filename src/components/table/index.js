@@ -71,13 +71,12 @@ export default function StickyHeadTable(data) {
 
   const classes = useStyles();
   const [tableData, setData] = React.useState(null);
-  const [page, setPage] = React.useState([]);
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
-     console.log('alo')
-      setData(data.tableData)
- },[]);
+    setData(data.tableData)
+  },[data]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -110,27 +109,20 @@ export default function StickyHeadTable(data) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tableData.line.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((line, index) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                  {Object.entries(line).map((item, index) => {
-                     console.log('nome: ', item)
-                    return (
-                      <TableCell key={index} align={'left'}>
-                        {item[1] === 'crime' ? 'crime': item[1]}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+            {tableData.line.map(line => (
+              <TableRow key={line[tableData.bind[0]]}>
+              {tableData.bind.map(bind => (
+                <TableCell key={bind} align={'left'}>{line[bind]}</TableCell>
+              ))}                
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={tableData.line.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
