@@ -50,7 +50,7 @@ export default function NovoSistema(props) {
 	useEffect(async () => {
 		if(id){
 			try {
-				const response = await api.get("/sistema/" + id);
+				const response = await api.get("/usuario/" + id);
 				if(response.data.data.length !== 0) {
 					setNome(response.data.data[0].nome)
 					setSistema(response.data.data[0])
@@ -74,7 +74,7 @@ export default function NovoSistema(props) {
 		if (nome){
 			if(id){
 				try {
-					const response = await api.put("/sistema/"+id, {nome});
+					const response = await api.put("/usuario/"+id, {nome});
 					if(response.status === 200){
 						setErro(false)
 						setSucesso(response.data)
@@ -86,7 +86,7 @@ export default function NovoSistema(props) {
 				}
 			}else{
 				try {
-					const response = await api.post("/sistema", {nome});
+					const response = await api.post("/usuario", {username: nome});
 					if(response.status === 200){
 						setErro(false)
 						setSucesso(response.data)
@@ -106,7 +106,7 @@ export default function NovoSistema(props) {
 			<Container>
 				<div className={classes.bar}>
 					<Typography className={classes.title}>
-						{id ? 'Editar sistema ' +  (sistema ? `(${sistema.nome})` : '') :'Novo sistema'}
+						{id ? 'Editar usuario ' +  (sistema ? `(${sistema.nome})` : '') :'Novo ususario'}
 					</Typography>
 				</div>
 				{ error && <p className={classes.error}>{error}</p>}

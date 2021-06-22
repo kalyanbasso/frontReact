@@ -5,6 +5,9 @@ import Navbar from "../../components/navbar/NavBar";
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
   
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -43,8 +46,22 @@ export default function Sistema() {
 
 	const data = {
 		column:['ID', 'Nome', 'Ações'],
-		bind:['id_usuario', 'nome', 'acoes'],
-		line: sortArray(usuario)
+		bind:['id_usuario', 'nome', 'acao'],
+		line: sortArray(usuario),
+		acoes:[
+			{
+				title: 'Editar',
+				path: '/novo-usuario',
+				icon: <EditIcon />
+			},
+			{
+				title: 'Excluir',
+				icon: <DeleteIcon />,
+				function: 'deletar',
+				path: '/usuario',
+				errormsg: 'Não foi possivel deletar!',
+				sucessomsg: 'Usuario deletado com sucesso'
+		},],
 	}
 
 	return (
@@ -56,13 +73,13 @@ export default function Sistema() {
             Usuario
           </Typography>
           <Button
-            onClick={novoProjeto}
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Novo
-          </Button>
+			component={Link}
+			to="/novo-usuario"
+			variant="contained"
+			color="primary"
+			className={classes.submit}> 
+			Novo
+		</Button>
         </div>
 				<StickyHeadTable tableData = {data}/>
 			</Container>

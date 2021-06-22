@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Sistema() {
 	const [sistemas, setSistemas] = useState([])
 	const classes = useStyles();
-  const history = useHistory();
+  	const history = useHistory();
 
 	useEffect(async () => {
 		try {
@@ -51,14 +51,15 @@ export default function Sistema() {
 			{
 				title: 'Editar',
 				path: '/novo-sistema',
-				icon: <EditIcon />,
-				function: 'editar'
+				icon: <EditIcon />
 			},
 			{
 				title: 'Excluir',
-				path: '/novo-sistema',
 				icon: <DeleteIcon />,
-				function: 'deletar'
+				function: 'deletar',
+				path: '/sistema',
+				errormsg: 'Não foi possivel deletar: projetos vinculados!',
+				sucessomsg: 'Sistema deletado com sucesso'
 			},],
 	}
 	

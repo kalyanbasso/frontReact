@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -9,6 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import api from "../../services/api"
 
 const useStyles = makeStyles({
   root: {
@@ -22,18 +24,30 @@ const useStyles = makeStyles({
   acoes: {
     marginLeft: '6%',
     color: 'black'
-  }
+  },
+  error: {
+		color: '#f44336',
+		textAlign: 'center'
+	},
+	sucesso: {
+		color: '#08aa1e',
+		textAlign: 'center'
+	}
 });
 
 export default function StickyHeadTable(data) {
 
   const classes = useStyles();
   const [tableData, setData] = React.useState(null);
+  const [linhas, setLinhas] = React.useState(null);
   const [page, setPage] = React.useState(0);
+  const [error, setErro] = useState(false)
+  const [sucesso, setSucesso] = useState(false)
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
     setData(data.tableData)
+    setLinhas(data.tableData.line)
   },[data]);
 
   const handleChangePage = (event, newPage) => {
@@ -45,10 +59,26 @@ export default function StickyHeadTable(data) {
     setPage(0);
   };
 
+  const handleDelete = async (id, path, errormsg, sucessomsg) => {
+    setErro(false)
+    setSucesso(false)
+    try {
+			const response = await api.delete(path+"/" + id);
+			
+      const line = linhas.filter( n => n[tableData.bind[0]] !== id)
+      setSucesso(sucessomsg)
+      setLinhas(line)
+		} catch (err){
+			console.log(err);
+      setErro(errormsg)
+		}
+  };
+
   return (
     
       <div>
-        
+        { error && <p className={classes.error}>{error}</p>}
+				{ sucesso && <p className={classes.sucesso}>{sucesso}</p>}
          {tableData &&
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -67,16 +97,28 @@ export default function StickyHeadTable(data) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tableData.line.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(line => (
+            {linhas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(line => (
               <TableRow key={line[tableData.bind[0]]}>
               {tableData.bind.map(bind => {
                 if(bind === 'acao')  {
                   return (
                     <TableCell key={bind} align={'left'} >
-                    {tableData.acoes.map(acao => (<Link className={classes.acoes} key={line+bind+acao.title} to={acao.path} variant="body2">
+                    {tableData.acoes.map(acao => {
+                      if(!acao.function){
+                        return (
+                          <Link key={line+bind+acao.title} className={classes.acoes} to={acao.path+"/"+line[tableData.bind[0]]} variant="body2">
+                            <Button >
+                              {acao.icon}
+                            </Button>
+                          </Link>
+                        )
+                      }
+                      return (
+                        <Button className={classes.acoes} key={line+bind+acao.title} onClick={()=>{handleDelete(line[tableData.bind[0]], acao.path, acao.errormsg, acao.sucessomsg)}}>
                             {acao.icon}
-                        </Link>
-                    ))}
+                        </Button>
+                      )
+                    })}
                     </TableCell>
                   )
                 }
@@ -91,7 +133,7 @@ export default function StickyHeadTable(data) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={tableData.line.length}
+        count={linhas.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

@@ -5,6 +5,9 @@ import Navbar from "../../components/navbar/NavBar";
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
   
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -43,8 +46,22 @@ export default function Sistema() {
 
 	const data = {
 		column:['ID', 'Titulo', 'Descrição', 'Projeto', 'Criador', 'Dev', 'Tempo Estimado', 'Tempo Realizado', 'Inicio', 'Fim', 'Prioridade', 'Complexidade', 'Ações' ],
-		bind:['id', 'titulo', 'descricao','id_projeto', 'id_criador', 'id_dev','tempo_estimado', 'tempo_realizado', 'data_inicio','data_fim', 'id_prioridade','complexidade', 'acoes',],
-		line: sortArray(tarefa)
+		bind:['id', 'titulo', 'descricao','id_projeto', 'id_criador', 'id_dev','tempo_estimado', 'tempo_realizado', 'data_inicio','data_fim', 'id_prioridade','complexidade', 'acao',],
+		line: sortArray(tarefa),
+		acoes:[
+			{
+				title: 'Editar',
+				path: '/nova-tarefa',
+				icon: <EditIcon />
+			},
+			{
+				title: 'Excluir',
+				icon: <DeleteIcon />,
+				function: 'deletar',
+				path: '/tarefa',
+				errormsg: 'Não foi possivel deletar!',
+				sucessomsg: 'Tarefa deletada com sucesso'
+		},],
 	}
 
 	return (
@@ -56,13 +73,13 @@ export default function Sistema() {
             Tarefa
           </Typography>
           <Button
-            onClick={novoProjeto}
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Novo
-          </Button>
+			component={Link}
+			to="/nova-tarefa"
+			variant="contained"
+			color="primary"
+			className={classes.submit}> 
+			Novo
+		</Button>
         </div>
 				<StickyHeadTable tableData = {data}/>
 			</Container>

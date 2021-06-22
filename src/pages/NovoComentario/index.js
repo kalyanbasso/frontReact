@@ -36,11 +36,10 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function NovoSistema(props) {
+export default function NovoCompentario(props) {
 
 	const classes = useStyles();
-	const history = useHistory();
-	const [nome, setNome] = useState('')
+	const [descricao, setNome] = useState('')
 	const [sistema, setSistema] = useState(null)
 	const [id] = useState(props.match.params.id)
 	const [nomeError, setNomeError] = useState(false)
@@ -50,9 +49,9 @@ export default function NovoSistema(props) {
 	useEffect(async () => {
 		if(id){
 			try {
-				const response = await api.get("/sistema/" + id);
+				const response = await api.get("/comentario/" + id);
 				if(response.data.data.length !== 0) {
-					setNome(response.data.data[0].nome)
+					setNome(response.data.data[0].descricao)
 					setSistema(response.data.data[0])
 				}
 			} catch (err){
@@ -67,14 +66,14 @@ export default function NovoSistema(props) {
 		setErro(false)
 		setSucesso(false)
 
-		if (nome === '') {
+		if (descricao === '') {
 		  setNomeError(true)
 		  setErro("Nome necessário")
 		}
-		if (nome){
+		if (descricao){
 			if(id){
 				try {
-					const response = await api.put("/sistema/"+id, {nome});
+					const response = await api.put("/comentario/"+id, {descricao});
 					if(response.status === 200){
 						setErro(false)
 						setSucesso(response.data)
@@ -86,7 +85,7 @@ export default function NovoSistema(props) {
 				}
 			}else{
 				try {
-					const response = await api.post("/sistema", {nome});
+					const response = await api.post("/comentario", {descricao});
 					if(response.status === 200){
 						setErro(false)
 						setSucesso(response.data)
@@ -106,7 +105,7 @@ export default function NovoSistema(props) {
 			<Container>
 				<div className={classes.bar}>
 					<Typography className={classes.title}>
-						{id ? 'Editar sistema ' +  (sistema ? `(${sistema.nome})` : '') :'Novo sistema'}
+						{id ? 'Editar comentario ' +  (sistema ? `(${sistema.descricao})` : '') :'Novo comentario'}
 					</Typography>
 				</div>
 				{ error && <p className={classes.error}>{error}</p>}
@@ -114,13 +113,13 @@ export default function NovoSistema(props) {
 				<form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
 					<TextField className={classes.field}
 						onChange={(e) => setNome(e.target.value)}
-						label="Nome" 
+						label="Descricao" 
 						margin="normal"
 						variant="outlined" 
 						fullWidth
 						required
 						error={nomeError}
-						value={nome}
+						value={descricao}
 					/>
 					<Button
 						type="submit"

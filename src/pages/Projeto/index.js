@@ -5,6 +5,10 @@ import Navbar from "../../components/navbar/NavBar";
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
+
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
   
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -19,10 +23,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   }
 }));
-
-function novoProjeto() {
-    console.log("object");
-}
 
 const sortArray = (data) => {
 	return data.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
@@ -43,8 +43,22 @@ export default function Sistema() {
 
 	const data = {
 		column:['ID', 'Titulo', 'Descricao', 'Criador', 'Sistema', 'Ações'],
-		bind:['id', 'titulo', 'descricao', 'id_criador', 'id_sistema', 'acoes'],
-		line: sortArray(projetos)
+		bind:['id', 'titulo', 'descricao', 'id_criador', 'id_sistema', 'acao'],
+		line: sortArray(projetos),
+		acoes:[
+			{
+				title: 'Editar',
+				path: '/novo-projeto',
+				icon: <EditIcon />
+			},
+			{
+				title: 'Excluir',
+				icon: <DeleteIcon />,
+				function: 'deletar',
+				path: '/projeto',
+				errormsg: 'Não foi possivel deletar: tarefas vinculadas!',
+				sucessomsg: 'Projeto deletado com sucesso'
+		},],
 	}
 
 	return (
@@ -56,13 +70,13 @@ export default function Sistema() {
             Projeto
           </Typography>
           <Button
-            onClick={novoProjeto}
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Novo
-          </Button>
+			component={Link}
+			to="/novo-projeto"
+			variant="contained"
+			color="primary"
+			className={classes.submit}> 
+			Novo
+		</Button>
         </div>
 				<StickyHeadTable tableData = {data}/>
 			</Container>

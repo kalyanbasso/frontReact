@@ -5,6 +5,9 @@ import Navbar from "../../components/navbar/NavBar";
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
   
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -44,7 +47,21 @@ export default function Sistema() {
 	const data = {
 		column:['ID', 'Tarefa', 'Descrição', 'Tarefa Pai', 'Ações'],
 		bind:['id_usuario', 'id_tarefa', 'descricao', 'id_pai_comentario', 'acao'],
-		line: sortArray(comentarios)
+		line: sortArray(comentarios),
+		acoes:[
+			{
+				title: 'Editar',
+				path: '/novo-comentario',
+				icon: <EditIcon />
+			},
+			{
+				title: 'Excluir',
+				icon: <DeleteIcon />,
+				function: 'deletar',
+				path: '/comentario',
+				errormsg: 'Não foi possivel deletar!',
+				sucessomsg: 'Comentario deletado com sucesso'
+		},],
 	}
 	
 	return (
@@ -56,13 +73,13 @@ export default function Sistema() {
             Comentarios
           </Typography>
           <Button
-            onClick={novoProjeto}
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Novo
-          </Button>
+			component={Link}
+			to="/novo-comentario"
+			variant="contained"
+			color="primary"
+			className={classes.submit}> 
+			Novo
+		</Button>
         </div>
 				<StickyHeadTable tableData = {data}/>
 			</Container>

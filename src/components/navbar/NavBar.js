@@ -10,7 +10,11 @@ import { SidebarData } from './SlideBarData';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
-    drawerPaper: { width: 'inherit' },
+    drawerPaper: { 
+      width: 'inherit', 
+      backgroundColor: '#6892bb',
+      boxShadow: "5px 5px 12px #9E9E9E"
+    },
     link: {
       textDecoration: 'none',
       color: theme.palette.text.primary

@@ -89,7 +89,7 @@ export default function SignIn() {
       try {
 				const response = await api.post("/login", {username, password});
 				login(response.data.token, remember);
-        history.push('/app')
+        history.push('/sistema')
 			} catch (err){
 				console.log(err);
         setErro("Usuario ou senha inválido")
