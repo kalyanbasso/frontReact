@@ -6,6 +6,7 @@ import { isAuthenticated } from "./services/auth";
 import Registrar from "./pages/Registrar";
 import Login from "./pages/Login";
 import Sistema from "./pages/Sistema";
+import NovoSistema from "./pages/NovoSistema"
 import Navbar from "./components/navbar/NavBar";
 
 const PrivateRoute = ({ component: Component, ...rest}) => (
@@ -29,6 +30,7 @@ const Routes = () => (
 			<Route path="/registrar" component={Registrar} />
 			<PrivateRoute path="/app" component={Navbar} />
 			<PrivateRoute path="/sistema" component={Sistema} />
+			<PrivateRoute path="/novo-sistema" component={NovoSistema} />
 			<Route path="*" component={() => <h3>404 não encontrado</h3>} />
 		</Switch>
 	</div>

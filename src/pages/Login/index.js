@@ -77,11 +77,11 @@ export default function SignIn() {
     setPasswordError(false)
     setErro(false)
 
-    if (username == '') {
+    if (username === '') {
       setUsernameError(true)
       setErro("Usuario necessário")
     }
-    if (password == '') {
+    if (password === '') {
       setPasswordError(true)
       setErro("Senha necessária")
     }
