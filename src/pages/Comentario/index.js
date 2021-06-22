@@ -46,7 +46,7 @@ export default function Sistema() {
 
 	const data = {
 		column:['ID', 'Tarefa', 'Descrição', 'Tarefa Pai', 'Ações'],
-		bind:['id_usuario', 'id_tarefa', 'descricao', 'id_pai_comentario', 'acao'],
+		bind:['id', 'titulo', 'descricao', 'descricao_pai', 'acao'],
 		line: sortArray(comentarios),
 		acoes:[
 			{

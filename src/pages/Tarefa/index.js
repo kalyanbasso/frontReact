@@ -46,7 +46,7 @@ export default function Sistema() {
 
 	const data = {
 		column:['ID', 'Titulo', 'Descrição', 'Projeto', 'Criador', 'Dev', 'Tempo Estimado', 'Tempo Realizado', 'Inicio', 'Fim', 'Prioridade', 'Complexidade', 'Ações' ],
-		bind:['id', 'titulo', 'descricao','id_projeto', 'id_criador', 'id_dev','tempo_estimado', 'tempo_realizado', 'data_inicio','data_fim', 'id_prioridade','complexidade', 'acao',],
+		bind:['id', 'titulo', 'descricao', 'projeto', 'usuario', 'id_dev','tempo_estimado', 'tempo_realizado', 'data_inicio','data_fim', 'prioridade','complexidade', 'acao',],
 		line: sortArray(tarefa),
 		acoes:[
 			{
