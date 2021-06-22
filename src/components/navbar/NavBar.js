@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { Link } from "react-router-dom";
 import { SidebarData } from './SlideBarData';
+import { logout } from "../../services/auth";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { useHistory } from 'react-router-dom';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +26,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MiniDrawer() {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleLogut = () => {
+    logout()
+    history.push('/')
+  }
+
   return ( 
     <div>
         <Drawer
@@ -43,6 +53,12 @@ export default function MiniDrawer() {
             </ListItem>
           </Link>
           ))}
+          <ListItem button onClick={handleLogut}>
+              <ListItemIcon>
+                <ExitToAppIcon/>
+              </ListItemIcon>
+              <ListItemText primary='Sair' />
+            </ListItem>
           </List>
         </Drawer>
     </div>
