@@ -43,18 +43,20 @@ export default function StickyHeadTable(data) {
   },[data]);
 
   const handleChangePage = (event, newPage) => {
+    console.log('daledale: ',event)
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
+    console.log('salvesalve:',+event.target.value )
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
-  const handleEditItem = () => {}
-
   return (
+    
       <div>
+        
          {tableData &&
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -73,7 +75,7 @@ export default function StickyHeadTable(data) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tableData.line.map(line => (
+            {tableData.line.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(line => (
               <TableRow key={line[tableData.bind[0]]}>
               {tableData.bind.map(bind => {
                 if(bind === 'acao')  {
