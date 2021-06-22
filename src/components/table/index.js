@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -18,6 +19,10 @@ const useStyles = makeStyles({
   container: {
     maxHeight: 550,
   },
+  acoes: {
+    marginLeft: '6%',
+    color: 'black'
+  }
 });
 
 export default function StickyHeadTable(data) {
@@ -64,9 +69,20 @@ export default function StickyHeadTable(data) {
           <TableBody>
             {tableData.line.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(line => (
               <TableRow key={line[tableData.bind[0]]}>
-              {tableData.bind.map(bind => (
-                <TableCell key={bind} align={'left'}>{line[bind]}</TableCell>
-              ))}                
+              {tableData.bind.map(bind => {
+                if(bind === 'acao')  {
+                  return (
+                    <TableCell key={bind} align={'left'} >
+                    {tableData.acoes.map(acao => (<Link className={classes.acoes} key={line+bind+acao.title} to={acao.path} variant="body2">
+                            {acao.icon}
+                        </Link>
+                    ))}
+                    </TableCell>
+                  )
+                }
+                return  <TableCell key={bind} align={'left'}>{line[bind]}</TableCell>
+              
+              })}
               </TableRow>
             ))}
           </TableBody>

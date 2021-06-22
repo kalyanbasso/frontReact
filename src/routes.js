@@ -15,6 +15,7 @@ import Tarefa from "./pages/Tarefa";
 import Grupo from "./pages/Grupo";
 import TarefaTipo from "./pages/TarefaTipo";
 import TarefaStatus from "./pages/TarefaStatus";
+import NovoSistema from "./pages/NovoSistema"
 import Navbar from "./components/navbar/NavBar";
 
 const PrivateRoute = ({ component: Component, ...rest}) => (
@@ -46,6 +47,7 @@ const Routes = () => (
 			<PrivateRoute path="/tarefa" component={Tarefa} />
 			<PrivateRoute path="/tarefa-tipo" component={TarefaTipo} />
 			<PrivateRoute path="/tarefa-status" component={TarefaStatus} />
+			<PrivateRoute path="/novo-sistema" component={NovoSistema} />
 			<Route path="*" component={() => <h3>404 não encontrado</h3>} />
 		</Switch>
 	</div>

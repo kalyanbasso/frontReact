@@ -5,28 +5,30 @@ import Navbar from "../../components/navbar/NavBar";
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
-  
+import { useHistory } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+
 const useStyles = makeStyles((theme) => ({
 	title: {
 	  alignItems: 'center',
     fontSize: '2em'
 	},
-  bar: {
-    marginTop: theme.spacing(8),
-	  marginBottom: theme.spacing(4),
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
+	bar: {
+		marginTop: theme.spacing(8),
+		marginBottom: theme.spacing(4),
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between'
+	}
 }));
 
-function novoProjeto() {
-    console.log("object");
-}
 
 export default function Sistema() {
 	const [sistemas, setSistemas] = useState([])
 	const classes = useStyles();
+  const history = useHistory();
 
 	useEffect(async () => {
 		try {
@@ -44,29 +46,41 @@ export default function Sistema() {
 	const data = {
 		column:['ID', 'Nome', 'Ações'],
 		bind:['id_sistema', 'nome', 'acao'],
-		line: sortArray(sistemas)
+		line: sortArray(sistemas),
+		acoes:[
+			{
+				title: 'Editar',
+				path: '/novo-sistema',
+				icon: <EditIcon />,
+				function: 'editar'
+			},
+			{
+				title: 'Excluir',
+				path: '/novo-sistema',
+				icon: <DeleteIcon />,
+				function: 'deletar'
+			},],
 	}
-
+	
 	return (
 		<>
 			<Navbar />
 			<Container>
-        <div className={classes.bar}>
-          <Typography className={classes.title}>
-            Sistemas
-          </Typography>
-          <Button
-            onClick={novoProjeto}
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Novo
-          </Button>
-        </div>
+       			<div className={classes.bar}>
+					<Typography className={classes.title}>
+						Sistemas
+					</Typography>
+					<Button
+						component={Link}
+						to="/novo-sistema"
+						variant="contained"
+						color="primary"
+						className={classes.submit}> 
+						Novo
+					</Button>
+				</div>
 				<StickyHeadTable tableData = {data}/>
 			</Container>
 		</>
 	);
-	
 }
