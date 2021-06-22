@@ -24,27 +24,27 @@ function novoProjeto() {
     console.log("object");
 }
 
+const sortArray = (data) => {
+	return data.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
+}
+
 export default function Sistema() {
-	const [sistemas, setSistemas] = useState([])
+	const [projetoUsuarios, setProjetosUsuarios] = useState([])
 	const classes = useStyles();
 
 	useEffect(async () => {
 		try {
-			const response = await api.get("/sistema");
-			setSistemas(response.data.data)
+			const response = await api.get("/projetoUsuario");
+			setProjetosUsuarios(response.data.data)
 		} catch (err){
 			console.log(err);
 		}
 	}, [])
 
-	const sortArray = (data) => {
-		return data.sort((a,b) => (a.id_sistema > b.id_sistema) ? 1 : ((b.id_sistema > a.id_sistema) ? -1 : 0))
-	}
-
 	const data = {
-		column:['ID', 'Nome', 'Ações'],
-		bind:['id_sistema', 'nome', 'acao'],
-		line: sortArray(sistemas)
+		column:['ID', 'Projeto', 'Usuario', 'Ações'],
+		bind:['id', 'id_projeto', 'id_usuario', 'acoes'],
+		line: sortArray(projetoUsuarios)
 	}
 
 	return (
@@ -53,7 +53,7 @@ export default function Sistema() {
 			<Container>
         <div className={classes.bar}>
           <Typography className={classes.title}>
-            Sistemas
+            Projetos de Usuarios
           </Typography>
           <Button
             onClick={novoProjeto}

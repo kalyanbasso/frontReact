@@ -67,7 +67,7 @@ export default function SignIn() {
   useEffect(() => {
     const token = getToken()
     if(token){
-      history.push('/app')
+      history.push('/sistema')
     }      
   }, [])
 

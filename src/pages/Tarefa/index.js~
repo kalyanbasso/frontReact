@@ -1,0 +1,33 @@
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+import { Form, Container } from './styles';
+
+class Registrar extends Component {
+	state = {
+		username: "",
+		password: "",
+		error: ""
+	};
+	
+	handleRegistrar = e => {
+		e.preventDefault();
+		//console.log("registrando");
+	};
+	
+	render(){
+		return (
+			<Container>
+				<Form onSubmit={this.handleRegistrar}>
+					<input type="text"
+					onChange={e => this.setState({username: e.target.value})}/>
+					<input type="password"
+					onChange={e => this.setState({username: e.target.password})}/>
+					<button type="submit">Cadastrar</button>
+					<Link to="/">Fazer login</Link>
+				</Form>
+			</Container>
+		);
+	}
+}
+export default Registrar;

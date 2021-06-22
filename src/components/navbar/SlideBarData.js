@@ -1,43 +1,76 @@
 import React from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import * as IoIcons from 'react-icons/io';
+
+
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import HomeIcon from '@material-ui/icons/Home';
+import WarningIcon from '@material-ui/icons/Warning';
+import PersonIcon from '@material-ui/icons/Person';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import ChatIcon from '@material-ui/icons/Chat';
+import GroupIcon from '@material-ui/icons/Group';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 export const SidebarData = [
   {
-    title: 'Home',
-    path: '/',
-    icon: <AiIcons.AiFillHome />,
-    cName: 'nav-text'
-  },
-  {
     title: 'Sistema',
     path: '/sistema',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <HomeIcon />,
     cName: 'nav-text'
   },
   {
-    title: 'Products',
-    path: '/products',
-    icon: <FaIcons.FaCartPlus />,
+    title: 'Projeto',
+    path: '/projeto',
+    icon: <AssignmentIcon />,
     cName: 'nav-text'
   },
   {
-    title: 'Team',
-    path: '/team',
-    icon: <IoIcons.IoMdPeople />,
+    title: 'Prioridade',
+    path: '/prioridade',
+    icon: <WarningIcon />,
     cName: 'nav-text'
   },
   {
-    title: 'Messages',
-    path: '/messages',
-    icon: <FaIcons.FaEnvelopeOpenText />,
+    title: 'Usuario',
+    path: '/usuario',
+    icon: <PersonIcon />,
     cName: 'nav-text'
   },
   {
-    title: 'Support',
-    path: '/support',
-    icon: <IoIcons.IoMdHelpCircle />,
+    title: 'Projetos de Usuarios',
+    path: '/projeto-usuarios',
+    icon: <AssignmentIndIcon />,
     cName: 'nav-text'
-  }
+  },
+  {
+    title: 'Comentario',
+    path: '/comentario',
+    icon: <ChatIcon />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Grupo',
+    path: '/grupo',
+    icon: <GroupIcon />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Tarefa',
+    path: '/tarefa',
+    icon: <AssignmentTurnedInIcon />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Tarefa Status',
+    path: '/tarefa-status',
+    icon: <AssignmentLateIcon />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Tarefa Tipo',
+    path: '/tarefa-tipo',
+    icon: <ListAltIcon />,
+    cName: 'nav-text'
+  },
 ];

@@ -6,6 +6,15 @@ import { isAuthenticated } from "./services/auth";
 import Registrar from "./pages/Registrar";
 import Login from "./pages/Login";
 import Sistema from "./pages/Sistema";
+import Projeto from "./pages/Projeto";
+import Prioridade from "./pages/Prioridade";
+import Usuario from "./pages/Usuario";
+import UsuarioProjeto from "./pages/UsuarioProjeto";
+import Comentario from "./pages/Comentario";
+import Tarefa from "./pages/Tarefa";
+import Grupo from "./pages/Grupo";
+import TarefaTipo from "./pages/TarefaTipo";
+import TarefaStatus from "./pages/TarefaStatus";
 import Navbar from "./components/navbar/NavBar";
 
 const PrivateRoute = ({ component: Component, ...rest}) => (
@@ -27,8 +36,16 @@ const Routes = () => (
 		<Switch>
 			<Route exact path="/" component={Login} />
 			<Route path="/registrar" component={Registrar} />
-			<PrivateRoute path="/app" component={Navbar} />
 			<PrivateRoute path="/sistema" component={Sistema} />
+			<PrivateRoute path="/projeto" component={Projeto} />
+			<PrivateRoute path="/prioridade" component={Prioridade} />
+			<PrivateRoute path="/usuario" component={Usuario} />
+			<PrivateRoute path="/projeto-usuarios" component={UsuarioProjeto} />
+			<PrivateRoute path="/comentario" component={Comentario} />
+			<PrivateRoute path="/grupo" component={Grupo} />
+			<PrivateRoute path="/tarefa" component={Tarefa} />
+			<PrivateRoute path="/tarefa-tipo" component={TarefaTipo} />
+			<PrivateRoute path="/tarefa-status" component={TarefaStatus} />
 			<Route path="*" component={() => <h3>404 não encontrado</h3>} />
 		</Switch>
 	</div>
