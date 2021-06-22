@@ -5,6 +5,8 @@ import Navbar from "../../components/navbar/NavBar";
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
   
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -43,8 +45,22 @@ export default function Sistema() {
 
 	const data = {
 		column:['ID', 'Descrição', 'Ações'],
-		bind:['id', 'descricao', 'acoes'],
-		line: sortArray(tarefaTipo)
+		bind:['id', 'descricao', 'acao'],
+		line: sortArray(tarefaTipo),
+		acoes:[
+			{
+				title: 'Editar',
+				path: '/novo-projeto',
+				icon: <EditIcon />
+			},
+			{
+				title: 'Excluir',
+				icon: <DeleteIcon />,
+				function: 'deletar',
+				path: '/projeto',
+				errormsg: 'Não foi possivel deletar: tarefas vinculadas!',
+				sucessomsg: 'Projeto deletado com sucesso'
+		},],
 	}
 
 	return (

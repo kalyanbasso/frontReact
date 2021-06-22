@@ -43,7 +43,7 @@ export default function Sistema() {
 
 	const data = {
 		column:['ID', 'Titulo', 'Descricao', 'Criador', 'Sistema', 'Ações'],
-		bind:['id', 'titulo', 'descricao', 'id_criador', 'id_sistema', 'acao'],
+		bind:['id', 'titulo', 'descricao', 'criador', 'sistema', 'acao'],
 		line: sortArray(projetos),
 		acoes:[
 			{

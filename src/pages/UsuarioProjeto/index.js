@@ -5,6 +5,8 @@ import Navbar from "../../components/navbar/NavBar";
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
   
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -43,8 +45,22 @@ export default function Sistema() {
 
 	const data = {
 		column:['ID', 'Projeto', 'Usuario', 'Ações'],
-		bind:['id', 'id_projeto', 'id_usuario', 'acoes'],
-		line: sortArray(projetoUsuarios)
+		bind:['id', 'titulo', 'nome', 'acao'],
+		line: sortArray(projetoUsuarios),
+		acoes:[
+			{
+				title: 'Editar',
+				path: '/novo-grupo',
+				icon: <EditIcon />
+			},
+			{
+				title: 'Excluir',
+				icon: <DeleteIcon />,
+				function: 'deletar',
+				path: '/grupo',
+				errormsg: 'Não foi possivel deletar!',
+				sucessomsg: 'Grupo deletado com sucesso'
+		},],
 	}
 
 	return (
