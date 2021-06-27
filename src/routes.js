@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
 //npm install react-router-dom axios styled-components prop-types font-awesome
 
 import { isAuthenticated } from "./services/auth";
@@ -38,32 +39,34 @@ const PrivateRoute = ({ component: Component, ...rest}) => (
 );
 
 const Routes = () => (
-	<BrowserRouter>
-	<div style={{ display: 'flex' }}>
-		<Switch>
-			<Route exact path="/" component={Login} />
-			<Route path="/registrar" component={Registrar} />
-			<PrivateRoute path="/sistema" component={Sistema} />
-			<PrivateRoute path="/projeto" component={Projeto} />
-			<PrivateRoute path="/prioridade" component={Prioridade} />
-			<PrivateRoute path="/usuario" component={Usuario} />
-			<PrivateRoute path="/projeto-usuarios" component={UsuarioProjeto} />
-			<PrivateRoute path="/comentario" component={Comentario} />
-			<PrivateRoute path="/grupo" component={Grupo} />
-			<PrivateRoute path="/tarefa" component={Tarefa} />
-			<PrivateRoute path="/tarefa-tipo" component={TarefaTipo} />
-			<PrivateRoute path="/tarefa-status" component={TarefaStatus} />
-			<PrivateRoute path="/novo-sistema/:id?" component={NovoSistema} />
-			<PrivateRoute path="/novo-projeto/:id?" component={NovoProjeto} />
-			<PrivateRoute path="/nova-prioridade/:id?" component={NovaPrioridade} />
-			<PrivateRoute path="/novo-usuario/:id?" component={NovoUsuario} />
-			<PrivateRoute path="/novo-comentario/:id?" component={NovoComentario} />
-			<PrivateRoute path="/novo-grupo/:id?" component={NovoGrupo} />
-			<PrivateRoute path="/nova-tarefa/:id?" component={NovaTarefa} />
-			<Route path="*" component={() => <h3>404 não encontrado</h3>} />
-		</Switch>
-	</div>
-	</BrowserRouter>
+	<ThemeContextWrapper>
+		<BrowserRouter>
+		<div style={{ display: 'flex' }}>
+			<Switch>
+				<Route exact path="/" component={Login} />
+				<Route path="/registrar" component={Registrar} />
+				<PrivateRoute path="/sistema" component={Sistema} />
+				<PrivateRoute path="/projeto" component={Projeto} />
+				<PrivateRoute path="/prioridade" component={Prioridade} />
+				<PrivateRoute path="/usuario" component={Usuario} />
+				<PrivateRoute path="/projeto-usuarios" component={UsuarioProjeto} />
+				<PrivateRoute path="/comentario" component={Comentario} />
+				<PrivateRoute path="/grupo" component={Grupo} />
+				<PrivateRoute path="/tarefa" component={Tarefa} />
+				<PrivateRoute path="/tarefa-tipo" component={TarefaTipo} />
+				<PrivateRoute path="/tarefa-status" component={TarefaStatus} />
+				<PrivateRoute path="/novo-sistema/:id?" component={NovoSistema} />
+				<PrivateRoute path="/novo-projeto/:id?" component={NovoProjeto} />
+				<PrivateRoute path="/nova-prioridade/:id?" component={NovaPrioridade} />
+				<PrivateRoute path="/novo-usuario/:id?" component={NovoUsuario} />
+				<PrivateRoute path="/novo-comentario/:id?" component={NovoComentario} />
+				<PrivateRoute path="/novo-grupo/:id?" component={NovoGrupo} />
+				<PrivateRoute path="/nova-tarefa/:id?" component={NovaTarefa} />
+				<Route path="*" component={() => <h3>404 não encontrado</h3>} />
+			</Switch>
+		</div>
+		</BrowserRouter>
+	</ThemeContextWrapper>
 )
 
 export default Routes;
