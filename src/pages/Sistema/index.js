@@ -9,6 +9,8 @@ import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import Sidebar from "../../components/Sidebar/Sidebar";
+import AdminNavbar from "../../components/Navbars/AdminNavbar"
 
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(8),
 		marginBottom: theme.spacing(4),
 		display: 'flex',
-		flexDirection: 'row',
+		flexDirection: 'row-reverse',
 		justifyContent: 'space-between'
 	}
 }));
@@ -65,12 +67,10 @@ export default function Sistema() {
 	
 	return (
 		<>
-			<Navbar />
+			<Sidebar />
+			<AdminNavbar brandText="Sistemas"/>
 			<Container>
        			<div className={classes.bar}>
-					<Typography className={classes.title}>
-						Sistemas
-					</Typography>
 					<Button
 						component={Link}
 						to="/novo-sistema"

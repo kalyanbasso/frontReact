@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 //import reportWebVitals from './reportWebVitals';
 //import * as serviceWorker from './serviceWorker';
+import "./assets/css/nucleo-icons.css";
 import "./assets/scss/black-dashboard-react.scss";
 
 ReactDOM.render(<App />, document.getElementById('root'));

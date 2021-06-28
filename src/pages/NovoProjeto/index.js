@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
-import StickyHeadTable from '../../components/table';
-import Navbar from "../../components/navbar/NavBar";
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 const useStyles = makeStyles((theme) => ({
 	submit: {
@@ -26,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'row',
 		justifyContent: 'space-between'
 	},
-	error: {
+	error2: {
 		color: '#f44336',
 		textAlign: 'center'
 	},
@@ -175,14 +171,14 @@ export default function NovoProjeto(props) {
 
 	return (
 		<>
-			<Navbar />
+			<Sidebar />
 			<Container>
 				<div className={classes.bar}>
 					<Typography className={classes.title}>
                         {id ? 'Editar projeto ' +  (projeto ? `(${projeto.titulo})` : '') :'Novo projeto'}
 					</Typography>
 				</div>
-				{ error && <p className={classes.error}>{error}</p>}
+				{ error && <p className={classes.error2}>{error}</p>}
 				{ sucesso && <p className={classes.sucesso}>{sucesso}</p>}
 				<form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
                     <Container className={classes.container}>

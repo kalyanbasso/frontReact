@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 		color: '#08aa1e',
 		textAlign: 'center'
 	}
-
 }));
 
 export default function NovaPrioridade(props) {
@@ -47,7 +46,7 @@ export default function NovaPrioridade(props) {
 	useEffect(async () => {
 		if(id){
 			try {
-				const response = await api.get("/prioridade/" + id);
+				const response = await api.get("/tarefa_tipo/" + id);
 				if(response.data.data.length !== 0) {
 					setNome(response.data.data[0].descricao)
 					setSistema(response.data.data[0])
@@ -71,7 +70,7 @@ export default function NovaPrioridade(props) {
 		if (descricao){
 			if(id){
 				try {
-					const response = await api.put("/prioridade/"+id, {descricao});
+					const response = await api.put("/tarefa_tipo/"+id, {descricao});
 					if(response.status === 200){
 						setErro(false)
 						setSucesso(response.data)
@@ -83,7 +82,7 @@ export default function NovaPrioridade(props) {
 				}
 			}else{
 				try {
-					const response = await api.post("/prioridade", {descricao});
+					const response = await api.post("/tarefa_tipo", {descricao});
 					if(response.status === 200){
 						setErro(false)
 						setSucesso(response.data)
@@ -103,7 +102,7 @@ export default function NovaPrioridade(props) {
 			<Container>
 				<div className={classes.bar}>
 					<Typography className={classes.title}>
-						{id ? 'Editar prioridade ' +  (sistema ? `(${sistema.descricao})` : '') :'Nova prioridade'}
+						{id ? 'Editar tipo ' +  (sistema ? `(${sistema.descricao})` : '') :'Novo tipo'}
 					</Typography>
 				</div>
 				{ error && <p className={classes.error2}>{error}</p>}

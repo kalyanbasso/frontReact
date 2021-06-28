@@ -6,7 +6,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Link } from "react-router-dom";
 import EditIcon from '@material-ui/icons/Edit';
+import Sidebar from "../../components/Sidebar/Sidebar";
+import AdminNavbar from "../../components/Navbars/AdminNavbar"
   
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -17,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
 	  marginBottom: theme.spacing(4),
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     justifyContent: 'space-between'
   }
 }));
@@ -50,36 +53,34 @@ export default function Sistema() {
 		acoes:[
 			{
 				title: 'Editar',
-				path: '/novo-projeto',
+				path: '/novo-status',
 				icon: <EditIcon />
 			},
 			{
 				title: 'Excluir',
 				icon: <DeleteIcon />,
 				function: 'deletar',
-				path: '/projeto',
-				errormsg: 'Não foi possivel deletar: tarefas vinculadas!',
-				sucessomsg: 'Projeto deletado com sucesso'
+				path: '/tarefa_status',
+				errormsg: 'Não foi possivel deletar',
+				sucessomsg: 'Status deletado com sucesso'
 		},],
 	}
 
 	return (
 		<>
-			<Navbar />
+			<Sidebar />
+			<AdminNavbar brandText="Tarefa Status"/>
 			<Container>
-        <div className={classes.bar}>
-          <Typography className={classes.title}>
-            Tarefa Status
-          </Typography>
-          <Button
-            onClick={novoProjeto}
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Novo
-          </Button>
-        </div>
+				<div className={classes.bar}>
+					<Button
+						component={Link}
+						to="/novo-status"
+						variant="contained"
+						color="primary"
+						className={classes.submit}> 
+						Novo
+					</Button>
+				</div>
 				<StickyHeadTable tableData = {data}/>
 			</Container>
 		</>

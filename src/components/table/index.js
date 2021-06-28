@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     marginLeft: '6%',
     color: 'black'
   },
-  error: {
+  error2: {
 		color: '#f44336',
 		textAlign: 'center'
 	},
@@ -77,7 +77,7 @@ export default function StickyHeadTable(data) {
   return (
     
       <div>
-        { error && <p className={classes.error}>{error}</p>}
+        { error && <p className={classes.error2}>{error}</p>}
 				{ sucesso && <p className={classes.sucesso}>{sucesso}</p>}
          {tableData &&
     <Paper className={classes.root}>

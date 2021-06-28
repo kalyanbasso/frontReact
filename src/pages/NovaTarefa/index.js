@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 const useStyles = makeStyles((theme) => ({
 	submit: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'row',
 		justifyContent: 'space-between'
 	},
-	error: {
+	error2: {
 		color: '#f44336',
 		textAlign: 'center'
 	},
@@ -44,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
     fildPequeno: {
         width: '45%'
     },
+    input: {
+		color: "white"
+	}
 
 }));
 
@@ -61,22 +65,26 @@ export default function NovaTarefa(props) {
     const [tipo, setTipo] = useState(null)
     const [status, setStatus] = useState([])
     const [id_projetoAux, setProjetoAux] = useState(null)
+    const [id_statusAux, setStatusAux ] = useState(null)
+    const [id_tipoAux, setTipoAux ] = useState(null)
+    const [id_grupoAux, setGrupoAux ] = useState(null)
+    const [id_prioridadeAux, setPrioridadeAux ] = useState(null)
     const [projeto, setProjeto] = useState(null)
-    const [complexidade, setComplexidade] = useState(null)
+    const [complexidade, setComplexidade] = useState('')
     const [complexidadeError, setComplexidadeError] = useState(null)
-	const [impacto, setImpacto] = useState(null)
+	const [impacto, setImpacto] = useState('')
     const [impactoError, setImpactoError] = useState(null)
 
     const [id_status, setIdStaus] = useState(null)
     const [statusError, setStausError] = useState(null)
-    const [tipos, setTipos] = useState(null)
+    const [tipos, setTipos] = useState([])
     const [id_tipos, setIdTipos] = useState(null)
     const [tipoError, setTipoError] = useState(null)
 
     const [id_projeto, setIdProjeto] = useState(null)
     const [projetoError, setProjetoError] = useState(null)
     const [grupo, setGrupo] = useState(null)
-    const [grupos, setGrupos] = useState(null)
+    const [grupos, setGrupos] = useState([])
     const [grupoError, setGrupoError] = useState(null)
     const [prioridade, setPrioridade] = useState(null)
     const [prioridades, setPriroridades] = useState([])
@@ -96,47 +104,19 @@ export default function NovaTarefa(props) {
         try {
             var response = await api.get("/projeto");
             setProjetos(response.data.data)
-            console.log(projetos);
-        } catch (err){
-            console.log(err);
-        }
-	}, [])
 
-    useEffect(async () => {
-        try {
-            var response = await api.get("/prioridade");
+            response = await api.get("/prioridade");
             setPriroridades(response.data.data)
-            console.log(prioridades);
-        } catch (err){
-            console.log(err);
-        }
-	}, [])
 
-    useEffect(async () => {
-        try {
-            var response = await api.get("/tarefa_tipo");
+            response = await api.get("/tarefa_tipo");
             setTipos(response.data.data)
-            console.log(projetos);
-        } catch (err){
-            console.log(err);
-        }
-	}, [])
 
-    useEffect(async () => {
-        try {
-            var response = await api.get("tarefa_status")
+            response = await api.get("/tarefa_status")
             setStatus(response.data.data)
-            console.log(response.data.data);
-        } catch (err){
-            console.log(err);
-        }
-	}, [])
 
-    useEffect(async () => {
-        try {
-            var response = await api.get("grupo")
+            response = await api.get("/grupo")
             setGrupos(response.data.data)
-            console.log(response.data.data);
+
         } catch (err){
             console.log(err);
         }
@@ -147,9 +127,38 @@ export default function NovaTarefa(props) {
             var response = await api.get("/projeto");
             setProjetos(response.data.data)
             if(id_projetoAux){
-                // const aux = response.data.data.filter( n => n.id_sistema === id_projetoAux)[0]
-                // setSistema(aux)                
+                const aux = response.data.data.filter( n => n.id === id_projetoAux)[0]
+                setProjeto(aux)
             }
+
+            response = await api.get("/prioridade");
+            setPriroridades(response.data.data)
+            if(id_prioridadeAux){
+                const aux = response.data.data.filter(n => n.id === id_prioridadeAux)[0]
+                setPrioridade(aux)
+            }
+
+            response = await api.get("/tarefa_tipo");
+            setTipos(response.data.data)
+            if(id_tipoAux){
+                const aux = response.data.data.filter(n => n.id === id_tipoAux)[0]
+                setTipo(aux)
+            }
+
+            response = await api.get("/tarefa_status")
+            setStatus(response.data.data)
+            if(id_statusAux){
+                const aux = response.data.data.filter(n => n.id === id_statusAux)[0]
+                setIdStaus(aux)
+            }
+
+            response = await api.get("/grupo")
+            setGrupos(response.data.data)
+            if(id_grupoAux){
+                const aux = response.data.data.filter(n => n.id === id_grupoAux)[0]
+                setGrupo(aux)
+            }
+
         } catch (err){
             console.log(err);
         }
@@ -158,15 +167,23 @@ export default function NovaTarefa(props) {
 	useEffect(async () => {
 		if(id){
 			try {
-				const response = await api.get("/projeto/" + id);
+				const response = await api.get("/tarefa/" + id);
+                console.log(response.data.data);
 				if(response.data.data.length !== 0) {
                     const aux = response.data.data[0]
-					setProjeto(aux)
+					
                     setTitulo(aux.titulo)
+                    setTempo(aux.tempo_estimado)
                     setDescricao(aux.descricao)
+                    setComplexidade(aux.complexidade)
+                    setImpacto(aux.impacto.toString())
                     setDataIni(aux.dt_ini)
                     setDataFim(aux.dt_fim)
-                    setProjetoAux(aux.id_sistema)
+                    setProjetoAux(aux.id_projeto)
+                    setStatusAux(aux.id_status_tarefa)
+                    setTipoAux(aux.id_tipo_tarefa)
+                    setGrupoAux(aux.id_grupo)
+                    setPrioridadeAux(aux.id_prioridade)
                     setAtualizar(true)
 				}
 			} catch (err){
@@ -241,7 +258,12 @@ export default function NovaTarefa(props) {
 		if(titulo && descricao && data_inicio && data_fim && tempo && complexidade && impacto && id_status && tipo && grupo && projeto && prioridade){
             if(id){
                 try {
-                    const response = await api.put("/projeto/"+id, {titulo, descricao, data_inicio, data_fim});
+                    const data = {
+                        titulo, descricao, id_projeto: projeto.id,
+                        tempo_estimado: tempo, complexidade, impacto, id_status_tarefa: id_status.id,
+                        data_inicio, data_fim, id_tipo_tarefa: tipo.id, id_grupo: grupo.id, id_prioridade: prioridade.id
+                    }
+                    const response = await api.put("/tarefa/"+id, data);
                     if(response.status === 200){
                         setSucesso(response.data)
                     }
@@ -273,14 +295,14 @@ export default function NovaTarefa(props) {
 
 	return (
 		<>
-			<Navbar />
+			<Sidebar />
 			<Container>
 				<div className={classes.bar}>
 					<Typography className={classes.title}>
                         {id ? 'Editar tarefa ' :'Nova tarefa'}
 					</Typography>
 				</div>
-				{ error && <p className={classes.error}>{error}</p>}
+				{ error && <p className={classes.error2}>{error}</p>}
 				{ sucesso && <p className={classes.sucesso}>{sucesso}</p>}
 				<form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
                     <Container className={classes.container}>
@@ -383,7 +405,7 @@ export default function NovaTarefa(props) {
                             onChange={(e, values) => setTipo(values ? {descricao: values.descricao, id: values.id} : null)}
                             fullWidth
                             options={tipos}
-                            value={id_tipos}
+                            value={tipo}
                             getOptionLabel={(option) => option.descricao}
                             renderInput={(params) => <TextField error={tipoError} {...params} label="Tipo" variant="outlined" />}
                         />

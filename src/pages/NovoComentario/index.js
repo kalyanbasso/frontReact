@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'row',
 		justifyContent: 'space-between'
 	},
-	error: {
+	error2: {
 		color: '#f44336',
 		textAlign: 'center'
 	},
@@ -108,7 +108,7 @@ export default function NovoCompentario(props) {
 						{id ? 'Editar comentario ' +  (sistema ? `(${sistema.descricao})` : '') :'Novo comentario'}
 					</Typography>
 				</div>
-				{ error && <p className={classes.error}>{error}</p>}
+				{ error && <p className={classes.error2}>{error}</p>}
 				{ sucesso && <p className={classes.sucesso}>{sucesso}</p>}
 				<form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
 					<TextField className={classes.field}

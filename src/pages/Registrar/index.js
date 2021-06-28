@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  error: {
+  error2: {
     color: '#f44336'
   }
 }));
@@ -108,7 +108,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Registrar
         </Typography>
-        { error && <p className={classes.error}>{error}</p>}
+        { error && <p className={classes.error2}>{error}</p>}
         <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField className={classes.field}
             onChange={(e) => setUsername(e.target.value)}

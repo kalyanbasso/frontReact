@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 const useStyles = makeStyles((theme) => ({
 	submit: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'row',
 		justifyContent: 'space-between'
 	},
-	error: {
+	error2: {
 		color: '#f44336',
 		textAlign: 'center'
 	},
@@ -102,14 +103,14 @@ export default function NovoSistema(props) {
 
 	return (
 		<>
-			<Navbar />
+			<Sidebar />
 			<Container>
 				<div className={classes.bar}>
 					<Typography className={classes.title}>
 						{id ? 'Editar usuario ' +  (sistema ? `(${sistema.nome})` : '') :'Novo ususario'}
 					</Typography>
 				</div>
-				{ error && <p className={classes.error}>{error}</p>}
+				{ error && <p className={classes.error2}>{error}</p>}
 				{ sucesso && <p className={classes.sucesso}>{sucesso}</p>}
 				<form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
 					<TextField className={classes.field}

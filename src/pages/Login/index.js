@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import AdminNavbar from 'components/Navbars/AdminNavbar';
 
 import api from "../../services/api";
 import { login, getToken } from "../../services/auth";
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  error: {
+  error2: {
     color: '#f44336'
   }
 }));
@@ -101,7 +102,6 @@ export default function SignIn() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -109,7 +109,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Entrar
         </Typography>
-        { error && <p className={classes.error}>{error}</p>}
+        { error && <p className={classes.error2}>{error}</p>}
         <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField className={classes.field}
             onChange={(e) => setUsername(e.target.value)}
@@ -119,6 +119,9 @@ export default function SignIn() {
             fullWidth
             required
             error={usernameError}
+            InputProps={{
+              className: classes.field
+            }}
           />
           <TextField className={classes.field}
             onChange={(e) => setPassword(e.target.value)}
