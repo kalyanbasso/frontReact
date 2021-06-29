@@ -68,7 +68,7 @@ export default function Sistema() {
 	return (
 		<>
 			<Sidebar />
-			<AdminNavbar brandText="Sistemas"/>
+			<AdminNavbar brandText="Tipos"/>
 			<Container>
 				<div className={classes.bar}>
 					<Button
